@@ -6,11 +6,11 @@ on:
       KERNEL_REPO:
         description: 'Link repo kernel'
         required: true
-        default: 'https://github.com/ramaadni/kernel_common_gki-5.10'
+        default: 'https://github.com/TP4HCEP/Nethunter_kernel_xiaomi_garnet'
       KERNEL_BRANCH:
         description: 'Branch kernel'
         required: true
-        default: 'wkcw'
+        default: 'nethunter'
       BUILD_NOROOT:
         description: 'Build Noroot variant'
         type: boolean
@@ -102,7 +102,7 @@ jobs:
 
       - name: Create Swap
         run: |
-          sudo fallocate -l 10G /swapfile
+          sudo fallocate -l 16G /swapfile
           sudo chmod 600 /swapfile
           sudo mkswap /swapfile
           sudo swapon /swapfile
@@ -160,8 +160,8 @@ jobs:
           export CLANG_PATH=$GITHUB_WORKSPACE/clang
           export PATH=$CLANG_PATH/bin:$PATH
 
-          make O=out ARCH=arm64 CC=clang LLVM=1 LLVM_IAS=1 gki_defconfig
-          make -j$(nproc) O=out ARCH=arm64 CC=clang LLVM=1 LLVM_IAS=1
+          make O=out ARCH=arm64 CC=clang LLVM=1 LLVM_IAS=1 nethunter_defconfig
+          make O=out ARCH=arm64 CC=clang LLVM=1 LLVM_IAS=1
 
       - name: Package Kernel with AnyKernel3
         id: zipkernel
